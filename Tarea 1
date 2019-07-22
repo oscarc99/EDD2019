@@ -1,0 +1,128 @@
+    public static void main(String[] args) {
+        Scanner leer = new Scanner(System.in);
+        System.out.println("-------------------");
+        System.out.println("Días de una fecha");
+        System.out.println("-----Ingrese fecha desde 1700-----");
+        System.out.println("Ingrese día");
+        int dia = leer.nextInt();
+        System.out.println("Ingrese mes");
+        int mes = leer.nextInt();
+        System.out.println("Ingrese año");
+        int año = leer.nextInt();
+        dias(dia, mes, año);
+        System.out.println("-------------------");
+        System.out.println("Primos de un numero");
+        System.out.println("Ingrese un numero");
+        int n = leer.nextInt();
+        erastostenes(n);
+
+    }
+
+    public static void dias(int day, int mont, int year) {
+        String da = "";
+        int siglo = 0;
+        int m = 0;
+        if (year >= 1700 && year <= 1799) {
+            siglo = 4;
+        } else if (year >= 1800 && year <= 1899) {
+            siglo = 2;
+        } else if (year >= 1900 && year <= 1999) {
+            siglo = 0;
+        } else if (year >= 2000 && year <= 2099) {
+            siglo = 6;
+        }
+        switch (mont) {
+            case 1:
+                m = 0;
+                break;
+            case 2:
+                m = 3;
+                break;
+            case 3:
+                m = 3;
+                break;
+            case 4:
+                m = 6;
+                break;
+            case 5:
+                m = 1;
+                break;
+            case 6:
+                m = 4;
+                break;
+            case 7:
+                m = 6;
+
+                break;
+            case 8:
+                m = 2;
+                break;
+            case 9:
+                m = 5;
+                break;
+            case 10:
+                m = 0;
+                break;
+            case 11:
+                m = 3;
+                break;
+            case 12:
+                m = 5;
+                break;
+
+        }
+        char c = (char) year;
+        String num = Integer.toString(year);
+        char[] a = num.toCharArray();
+        String s = String.valueOf(a[2]) + String.valueOf(a[3]);
+        int last = Integer.parseInt(s);
+
+        int x = day + m + (last / 4) + last + siglo;
+
+        int res = x % 7;
+
+        switch (res) {
+            case 0:
+                da = "Domingo";
+                break;
+            case 1:
+                da = "Lunes";
+                break;
+            case 2:
+                da = "Martes";
+                break;
+            case 3:
+                da = "Miercoles";
+                break;
+            case 4:
+                da = "Jueves";
+                break;
+            case 5:
+                da = "Viernes";
+                break;
+            case 6:
+                da = "Sabado";
+                break;
+        }
+        System.out.println("La fecha fue un día " + da);
+    }
+    
+    public static void erastostenes(int n){
+        int limite = (int) Math.floor(Math.sqrt(n)) + 1;
+
+		List<Long> componentes = new ArrayList<Long>();
+		int posicion = 0;
+		for (int i = 2; i <= limite; i++) {
+			if (!componentes.contains(Long.valueOf(i))) {
+				for (int j = i; j <= n / i + 1; j++)
+					componentes.add(Long.valueOf(i * j));
+			}
+		}
+
+		int m = 0;
+		for (pos = 2; posicion < n; posicion++) {
+			if (!componentes.contains(Long.valueOf(pos)))
+				System.out.println(++m + ": " + posicion);
+		}
+    }
+}
